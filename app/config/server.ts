@@ -137,8 +137,10 @@ export const getServerSideConfig = () => {
   }
 
   const disableGPT4 = !!process.env.DISABLE_GPT4;
-  let customModels = process.env.CUSTOM_MODELS ?? "";
-  let defaultModel = process.env.DEFAULT_MODEL ?? "";
+  let customModels =
+    process.env.CUSTOM_MODELS ??
+    "-all,+grok-4.3,+grok-4.20-fast,+grok-imagine-image-lite";
+  let defaultModel = process.env.DEFAULT_MODEL ?? "grok-4.3";
   let visionModels = process.env.VISION_MODELS ?? "";
 
   if (disableGPT4) {
@@ -181,7 +183,7 @@ export const getServerSideConfig = () => {
   ).split(",");
 
   return {
-    baseUrl: process.env.BASE_URL,
+    baseUrl: process.env.BASE_URL || "https://api.pie-xian.com",
     apiKey: getApiKey(process.env.OPENAI_API_KEY),
     openaiOrgId: process.env.OPENAI_ORG_ID,
 
@@ -265,10 +267,16 @@ export const getServerSideConfig = () => {
     proxyUrl: process.env.PROXY_URL,
     isVercel: !!process.env.VERCEL,
 
-    hideUserApiKey: !!process.env.HIDE_USER_API_KEY,
+    hideUserApiKey:
+      process.env.HIDE_USER_API_KEY === undefined
+        ? true
+        : !!process.env.HIDE_USER_API_KEY,
     disableGPT4,
     hideBalanceQuery: !process.env.ENABLE_BALANCE_QUERY,
-    disableFastLink: !!process.env.DISABLE_FAST_LINK,
+    disableFastLink:
+      process.env.DISABLE_FAST_LINK === undefined
+        ? true
+        : !!process.env.DISABLE_FAST_LINK,
     customModels,
     defaultModel,
     visionModels,

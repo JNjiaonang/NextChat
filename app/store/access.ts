@@ -141,12 +141,12 @@ const DEFAULT_ACCESS_STATE = {
 
   // server config
   needCode: true,
-  hideUserApiKey: false,
+  hideUserApiKey: true,
   hideBalanceQuery: false,
   disableGPT4: false,
-  disableFastLink: false,
-  customModels: "",
-  defaultModel: "",
+  disableFastLink: true,
+  customModels: "-all,+grok-4.3,+grok-4.20-fast,+grok-imagine-image-lite",
+  defaultModel: "grok-4.3",
   visionModels: "",
 
   // tts config

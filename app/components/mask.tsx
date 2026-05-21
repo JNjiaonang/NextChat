@@ -249,6 +249,7 @@ export function MaskConfig(props: {
       <List>
         <ModelConfigList
           modelConfig={{ ...props.mask.modelConfig }}
+          hideModelSelector={true}
           updateConfig={updateConfig}
         />
         {props.extraListItems}
